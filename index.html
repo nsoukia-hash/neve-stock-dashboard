@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NEVE — Stock de Perfumes</title>
+<style>
+  :root {
+    --bg: #0f0f12; --card-bg: #1a1a1f; --border: #2a2a30;
+    --text: #eaeaea; --text-dim: #9a9aa5;
+    --green: #34d399; --red: #f87171; --gray: #6b7280;
+    --accent: #c9a24a;
+  }
+  * { box-sizing: border-box; }
+  body {
+    background: var(--bg); color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    margin: 0; padding: 2rem 1.5rem;
+  }
+  .header { max-width: 1100px; margin: 0 auto 2rem; }
+  .header h1 { font-size: 1.6rem; margin: 0 0 0.3rem; letter-spacing: 0.02em; }
+  .header .meta { color: var(--text-dim); font-size: 0.9rem; }
+  .stats { display: flex; gap: 1.5rem; margin-top: 1rem; flex-wrap: wrap; }
+  .stat { background: var(--card-bg); border: 1px solid var(--border); border-radius: 10px; padding: 0.8rem 1.2rem; }
+  .stat .num { font-size: 1.4rem; font-weight: 700; }
+  .stat .label { font-size: 0.8rem; color: var(--text-dim); }
+  .stat.in .num { color: var(--green); }
+  .stat.out .num { color: var(--red); }
+  .search {
+    max-width: 1100px; margin: 0 auto 1.5rem; display: block; width: 100%;
+    padding: 0.7rem 1rem; border-radius: 8px; border: 1px solid var(--border);
+    background: var(--card-bg); color: var(--text); font-size: 0.95rem;
+  }
+  .grid {
+    max-width: 1100px; margin: 0 auto; display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 1rem;
+  }
+  .card {
+    background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px;
+    overflow: hidden; border-left: 3px solid var(--gray);
+  }
+  .card.card-in { border-left-color: var(--green); }
+  .card.card-out { border-left-color: var(--red); }
+  .card-header { padding: 0.9rem 1rem 0.5rem; }
+  .card-header h3 { margin: 0; font-size: 1rem; }
+  .brand { color: var(--accent); font-size: 0.8rem; }
+  table { width: 100%; border-collapse: collapse; font-size: 0.82rem; }
+  th { text-align: left; color: var(--text-dim); font-weight: 500; padding: 0.3rem 1rem; border-top: 1px solid var(--border); }
+  td { padding: 0.35rem 1rem; border-top: 1px solid var(--border); }
+  td a { color: var(--text); text-decoration: none; }
+  td a:hover { text-decoration: underline; }
+  .badge { padding: 0.15rem 0.5rem; border-radius: 6px; font-size: 0.75rem; font-weight: 600; }
+  .badge-in { background: rgba(52,211,153,0.15); color: var(--green); }
+  .badge-out { background: rgba(248,113,113,0.15); color: var(--red); }
+  .badge-unknown { background: rgba(107,114,128,0.2); color: var(--text-dim); }
+  .price-change { font-size: 0.7rem; color: var(--accent); }
+  .note { font-size: 0.7rem; padding: 0.1rem 0.4rem; border-radius: 5px; }
+  .note-good { background: rgba(52,211,153,0.15); color: var(--green); }
+  .note-bad { background: rgba(248,113,113,0.15); color: var(--red); }
+</style>
+</head>
+<body>
+  <div class="header">
+    <h1>NEVE — Stock de Perfumes</h1>
+    <div class="meta">Última revisión: <strong>12/08/2026 18:53</strong></div>
+    <div class="stats">
+      <div class="stat"><div class="num">4</div><div class="label">Perfumes chequeados</div></div>
+      <div class="stat in"><div class="num">3</div><div class="label">Con stock en algún sitio</div></div>
+      <div class="stat out"><div class="num">1</div><div class="label">Sin stock en ningún sitio</div></div>
+    </div>
+  </div>
+  <input class="search" id="search" type="text" placeholder="Buscar perfume o marca...">
+  <div class="grid" id="grid">
+    
+        <div class="card card-in">
+          <div class="card-header">
+            <h3>Bois Du Portugal by Creed</h3>
+            <span class="brand">Creed</span>
+          </div>
+          <table>
+            <thead><tr><th>Sitio</th><th>Tamaño</th><th>Estado</th><th>Precio</th><th></th></tr></thead>
+            <tbody>
+                <tr>
+                  <td><a href="https://www.venbafragrance.com/products/creed-bois-du-portugal-edp" target="_blank" rel="noopener">Venba Fragrance</a></td>
+                  <td>100ml</td>
+                  <td><span class="badge badge-out">Sin stock</span></td>
+                  <td>$27,999.00 </td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td><a href="https://www.olfactoryfactoryllc.com/products/creed-bois-du-portugal" target="_blank" rel="noopener">Olfactory Factory</a></td>
+                  <td>250ml</td>
+                  <td><span class="badge badge-out">Sin stock</span></td>
+                  <td>$35,900.00 </td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td><a href="https://www.olfactoryfactoryllc.com/products/creed-bois-du-portugal" target="_blank" rel="noopener">Olfactory Factory</a></td>
+                  <td>500ml</td>
+                  <td><span class="badge badge-out">Sin stock</span></td>
+                  <td>$60,900.00 </td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td><a href="https://www.olfactoryfactoryllc.com/products/creed-bois-du-portugal" target="_blank" rel="noopener">Olfactory Factory</a></td>
+                  <td>100ml</td>
+                  <td><span class="badge badge-out">Sin stock</span></td>
+                  <td>$21,900.00 </td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td><a href="https://www.olfactoryfactoryllc.com/products/creed-bois-du-portugal" target="_blank" rel="noopener">Olfactory Factory</a></td>
+                  <td>50ml</td>
+                  <td><span class="badge badge-out">Sin stock</span></td>
+                  <td>$14,900.00 </td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td><a href="https://www.olfactoryfactoryllc.com/products/creed-bois-du-portugal" target="_blank" rel="noopener">Olfactory Factory</a></td>
+                  <td>120ml</td>
+                  <td><span class="badge badge-out">Sin stock</span></td>
+                  <td>$27,500.00 </td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td><a href="https://mysticperfume.com/products/creed-bois-du-portugal" target="_blank" rel="noopener">Mystic Perfume</a></td>
+                  <td>100ml</td>
+                  <td><span class="badge badge-out">Sin stock</span></td>
+                  <td>$23,999.00 </td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td><a href="https://www.jomashop.com/creed-perfume-cbpmes17.html" target="_blank" rel="noopener">Jomashop</a></td>
+                  <td>50ml</td>
+                  <td><span class="badge badge-in">En stock</span></td>
+                  <td>$181.34 </td>
+                  <td><span class="note note-good">volvió al stock</span></td>
+                </tr></tbody>
+          </table>
+        </div>
+        <div class="card card-in">
+          <div class="card-header">
+            <h3>Carmina by Creed</h3>
+            <span class="brand">Creed</span>
+          </div>
+          <table>
+            <thead><tr><th>Sitio</th><th>Tamaño</th><th>Estado</th><th>Precio</th><th></th></tr></thead>
+            <tbody>
+                <tr>
+                  <td><a href="https://www.venbafragrance.com/products/creed-carmina-edp" target="_blank" rel="noopener">Venba Fragrance</a></td>
+                  <td>75ml</td>
+                  <td><span class="badge badge-out">Sin stock</span></td>
+                  <td>$26,999.00 </td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td><a href="https://www.venbafragrance.com/products/creed-carmina-edp" target="_blank" rel="noopener">Venba Fragrance</a></td>
+                  <td>490ml</td>
+                  <td><span class="badge badge-out">Sin stock</span></td>
+                  <td>$69,999.00 </td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td><a href="https://www.olfactoryfactoryllc.com/products/creed-carmina" target="_blank" rel="noopener">Olfactory Factory</a></td>
+                  <td>75ml</td>
+                  <td><span class="badge badge-out">Sin stock</span></td>
+                  <td>$22,500.00 </td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td><a href="https://www.olfactoryfactoryllc.com/products/creed-carmina" target="_blank" rel="noopener">Olfactory Factory</a></td>
+                  <td>30ml</td>
+                  <td><span class="badge badge-out">Sin stock</span></td>
+                  <td>$12,199.00 </td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td><a href="https://mysticperfume.com/products/creed-carmina-1" target="_blank" rel="noopener">Mystic Perfume</a></td>
+                  <td>75ml</td>
+                  <td><span class="badge badge-in">En stock</span></td>
+                  <td>$24,999.00 </td>
+                  <td><span class="note note-good">volvió al stock</span></td>
+                </tr>
+                <tr>
+                  <td>Jomashop</td>
+                  <td>—</td>
+                  <td><span class="badge badge-unknown">PRODUCT_NOT_FOUND</span></td>
+                  <td>— </td>
+                  <td></td>
+                </tr></tbody>
+          </table>
+        </div>
+        <div class="card card-in">
+          <div class="card-header">
+            <h3>Centaurus by Creed</h3>
+            <span class="brand">Creed</span>
+          </div>
+          <table>
+            <thead><tr><th>Sitio</th><th>Tamaño</th><th>Estado</th><th>Precio</th><th></th></tr></thead>
+            <tbody>
+                <tr>
+                  <td><a href="https://www.venbafragrance.com/products/creed-centaurus-edp" target="_blank" rel="noopener">Venba Fragrance</a></td>
+                  <td>100ml</td>
+                  <td><span class="badge badge-out">Sin stock</span></td>
+                  <td>$29,999.00 </td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td><a href="https://www.olfactoryfactoryllc.com/products/creed-centaurus" target="_blank" rel="noopener">Olfactory Factory</a></td>
+                  <td>100ml</td>
+                  <td><span class="badge badge-out">Sin stock</span></td>
+                  <td>$24,500.00 </td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td><a href="https://www.olfactoryfactoryllc.com/products/creed-centaurus" target="_blank" rel="noopener">Olfactory Factory</a></td>
+                  <td>50ml</td>
+                  <td><span class="badge badge-in">En stock</span></td>
+                  <td>$16,900.00 </td>
+                  <td><span class="note note-good">volvió al stock</span></td>
+                </tr>
+                <tr>
+                  <td><a href="https://mysticperfume.com/products/creed-centaurus" target="_blank" rel="noopener">Mystic Perfume</a></td>
+                  <td>100ml</td>
+                  <td><span class="badge badge-in">En stock</span></td>
+                  <td>$27,499.00 </td>
+                  <td><span class="note note-good">volvió al stock</span></td>
+                </tr>
+                <tr>
+                  <td>Jomashop</td>
+                  <td>—</td>
+                  <td><span class="badge badge-unknown">PRODUCT_NOT_FOUND</span></td>
+                  <td>— </td>
+                  <td></td>
+                </tr></tbody>
+          </table>
+        </div>
+        <div class="card card-out">
+          <div class="card-header">
+            <h3>Silver Mountain Water by Creed</h3>
+            <span class="brand">Creed</span>
+          </div>
+          <table>
+            <thead><tr><th>Sitio</th><th>Tamaño</th><th>Estado</th><th>Precio</th><th></th></tr></thead>
+            <tbody>
+                <tr>
+                  <td><a href="https://www.venbafragrance.com/products/creed-silver-mountain-water-edp" target="_blank" rel="noopener">Venba Fragrance</a></td>
+                  <td>100ml</td>
+                  <td><span class="badge badge-out">Sin stock</span></td>
+                  <td>$25,999.00 </td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td><a href="https://www.venbafragrance.com/products/creed-silver-mountain-water-edp" target="_blank" rel="noopener">Venba Fragrance</a></td>
+                  <td>240ml</td>
+                  <td><span class="badge badge-out">Sin stock</span></td>
+                  <td>$41,999.00 </td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td><a href="https://www.venbafragrance.com/products/creed-silver-mountain-water-edp" target="_blank" rel="noopener">Venba Fragrance</a></td>
+                  <td>490ml</td>
+                  <td><span class="badge badge-out">Sin stock</span></td>
+                  <td>$79,999.00 </td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td><a href="https://www.olfactoryfactoryllc.com/products/creed-silver-mountain-water" target="_blank" rel="noopener">Olfactory Factory</a></td>
+                  <td>250ml</td>
+                  <td><span class="badge badge-out">Sin stock</span></td>
+                  <td>$40,900.00 </td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td><a href="https://www.olfactoryfactoryllc.com/products/creed-silver-mountain-water" target="_blank" rel="noopener">Olfactory Factory</a></td>
+                  <td>50ml</td>
+                  <td><span class="badge badge-out">Sin stock</span></td>
+                  <td>$14,500.00 </td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td><a href="https://www.olfactoryfactoryllc.com/products/creed-silver-mountain-water" target="_blank" rel="noopener">Olfactory Factory</a></td>
+                  <td>100ml</td>
+                  <td><span class="badge badge-out">Sin stock</span></td>
+                  <td>$25,500.00 </td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td><a href="https://www.olfactoryfactoryllc.com/products/creed-silver-mountain-water" target="_blank" rel="noopener">Olfactory Factory</a></td>
+                  <td>30ml</td>
+                  <td><span class="badge badge-out">Sin stock</span></td>
+                  <td>$10,999.00 </td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td><a href="https://mysticperfume.com/products/creed-silver-mountain-water-1" target="_blank" rel="noopener">Mystic Perfume</a></td>
+                  <td>50ml</td>
+                  <td><span class="badge badge-out">Sin stock</span></td>
+                  <td>$14,999.00 </td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td><a href="https://mysticperfume.com/products/creed-silver-mountain-water-1" target="_blank" rel="noopener">Mystic Perfume</a></td>
+                  <td>100ml</td>
+                  <td><span class="badge badge-out">Sin stock</span></td>
+                  <td>$25,999.00 </td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td>Jomashop</td>
+                  <td>—</td>
+                  <td><span class="badge badge-unknown">PRODUCT_NOT_FOUND</span></td>
+                  <td>— </td>
+                  <td></td>
+                </tr></tbody>
+          </table>
+        </div>
+  </div>
+  <script>
+    const search = document.getElementById('search');
+    const cards = Array.from(document.querySelectorAll('.card'));
+    search.addEventListener('input', () => {
+      const q = search.value.toLowerCase();
+      cards.forEach(c => {
+        c.style.display = c.textContent.toLowerCase().includes(q) ? '' : 'none';
+      });
+    });
+  </script>
+</body>
+</html>
